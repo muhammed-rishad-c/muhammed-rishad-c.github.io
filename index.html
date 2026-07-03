@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammed Rishad C — Software Engineer</title>
+<meta name="description" content="Portfolio of Muhammed Rishad C, Software Engineer specializing in backend systems, AI/ML applications, and open-source tooling.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0F14;
+    --surface:#121821;
+    --surface-2:#161D28;
+    --border:#232B37;
+    --text:#E6EDF3;
+    --text-muted:#8B98A5;
+    --accent:#E8A33D;
+    --accent-dim:#8a642a;
+    --cyan:#4FD1C5;
+    --mono:'IBM Plex Mono', monospace;
+    --sans:'IBM Plex Sans', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent);color:#0B0F14;}
+  a{color:var(--cyan);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,15,20,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;}
+  .logo{font-family:var(--mono);font-weight:600;font-size:14px;color:var(--text);}
+  .logo span{color:var(--accent);}
+  .navlinks{display:flex;gap:24px;font-family:var(--mono);font-size:13px;}
+  .navlinks a{color:var(--text-muted);}
+  .navlinks a:hover{color:var(--accent);text-decoration:none;}
+  .nav-toggle{display:none;background:none;border:1px solid var(--border);color:var(--text);font-family:var(--mono);padding:6px 10px;border-radius:4px;}
+
+  @media (max-width:640px){
+    .navlinks{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:90px 0 70px;border-bottom:1px solid var(--border);}
+  .prompt-line{font-family:var(--mono);color:var(--text-muted);font-size:13px;margin-bottom:18px;}
+  .prompt-line .sym{color:var(--cyan);}
+  .terminal{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:8px;
+    overflow:hidden;
+    margin-bottom:32px;
+  }
+  .terminal-bar{
+    display:flex;align-items:center;gap:6px;
+    padding:10px 14px;border-bottom:1px solid var(--border);
+    background:var(--surface-2);
+  }
+  .dot{width:10px;height:10px;border-radius:50%;}
+  .dot.r{background:#ff5f56;} .dot.y{background:#ffbd2e;} .dot.g{background:#27c93f;}
+  .terminal-title{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--text-muted);}
+  .terminal-body{padding:22px 20px;font-family:var(--mono);font-size:15px;}
+  .terminal-body .line{white-space:pre-wrap;}
+  .cursor{display:inline-block;width:9px;height:18px;background:var(--accent);vertical-align:text-bottom;animation:blink 1s step-start infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  h1.name{
+    font-family:var(--mono);
+    font-size:clamp(32px,6vw,52px);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin-bottom:8px;
+  }
+  .role{
+    font-family:var(--sans);
+    font-size:clamp(16px,2.4vw,20px);
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:18px;
+  }
+  .summary{max-width:620px;color:var(--text-muted);font-size:16px;margin-bottom:26px;}
+  .links{display:flex;flex-wrap:wrap;gap:12px;}
+  .link-btn{
+    font-family:var(--mono);font-size:13px;
+    border:1px solid var(--border);
+    padding:9px 16px;border-radius:6px;
+    color:var(--text);
+    display:inline-flex;align-items:center;gap:8px;
+    transition:border-color .15s, color .15s;
+  }
+  .link-btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none;}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:64px 0;border-bottom:1px solid var(--border);}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:30px;}
+  .sec-cmd{font-family:var(--mono);color:var(--cyan);font-size:14px;}
+  .sec-title{font-family:var(--sans);font-size:26px;font-weight:700;}
+
+  /* ---------- ABOUT ---------- */
+  .about-text{max-width:680px;color:var(--text-muted);font-size:16px;}
+  .about-text strong{color:var(--text);font-weight:600;}
+
+  /* ---------- STATS ---------- */
+  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:34px;}
+  .stat-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:8px;
+    padding:16px;font-family:var(--mono);
+  }
+  .stat-card .val{font-size:24px;font-weight:700;color:var(--accent);}
+  .stat-card .lbl{font-size:12px;color:var(--text-muted);margin-top:4px;}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;}
+  .skill-group h3{font-family:var(--mono);font-size:13px;color:var(--cyan);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    font-family:var(--mono);font-size:12.5px;
+    background:var(--surface);border:1px solid var(--border);
+    padding:5px 10px;border-radius:5px;color:var(--text);
+  }
+
+  /* ---------- OPEN SOURCE ---------- */
+  .oss-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+    padding:26px;margin-bottom:20px;
+  }
+  .oss-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;}
+  .oss-title{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--text);}
+  .oss-tag{font-family:var(--mono);font-size:11px;color:var(--bg);background:var(--accent);padding:3px 9px;border-radius:20px;font-weight:600;}
+  .oss-links{font-family:var(--mono);font-size:12.5px;display:flex;gap:14px;}
+  ul.bullets{list-style:none;padding:0;}
+  ul.bullets li{
+    position:relative;padding-left:20px;margin-bottom:10px;color:var(--text-muted);font-size:15px;
+  }
+  ul.bullets li::before{
+    content:'▸';position:absolute;left:0;color:var(--cyan);
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .project-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+    padding:26px;margin-bottom:18px;
+  }
+  .project-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;}
+  .project-title{font-family:var(--sans);font-size:19px;font-weight:700;}
+  .project-links a{font-family:var(--mono);font-size:12.5px;}
+  .pill-row{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0;}
+  .pill{font-family:var(--mono);font-size:11px;color:var(--text-muted);border:1px solid var(--border);padding:3px 9px;border-radius:20px;}
+  .pai-block{margin-top:12px;}
+  .pai-block .lbl{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:0.05em;margin-top:10px;}
+  .pai-block p{color:var(--text-muted);font-size:14.5px;margin-top:4px;}
+
+  #more-projects{display:none;}
+  #more-projects.show{display:block;}
+  .load-more-wrap{display:flex;justify-content:center;margin-top:8px;}
+  .load-more-btn{
+    font-family:var(--mono);font-size:13px;background:none;
+    border:1px dashed var(--border);color:var(--accent);
+    padding:12px 22px;border-radius:6px;cursor:pointer;
+    transition:border-color .15s, background .15s;
+  }
+  .load-more-btn:hover{border-color:var(--accent);background:rgba(232,163,61,0.06);}
+  .load-more-btn.hidden{display:none;}
+
+  /* ---------- EDUCATION / CERTS ---------- */
+  .edu-card{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:22px;}
+  .edu-left h3{font-size:17px;font-weight:700;margin-bottom:4px;}
+  .edu-left p{color:var(--text-muted);font-size:14.5px;}
+  .edu-right{font-family:var(--mono);text-align:right;color:var(--text-muted);font-size:13px;}
+  .edu-right .cgpa{color:var(--accent);font-weight:700;font-size:16px;}
+  .certs{margin-top:18px;display:flex;flex-direction:column;gap:10px;}
+  .cert-row{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--text-muted);font-family:var(--mono);font-size:13.5px;}
+  .cert-row::before{content:'✓';color:var(--cyan);font-weight:700;}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{padding:60px 0 40px;}
+  .contact-box{
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+    padding:40px;text-align:center;
+  }
+  .contact-box h2{font-size:24px;margin-bottom:10px;}
+  .contact-box p{color:var(--text-muted);margin-bottom:24px;}
+  .contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;}
+  .foot-note{text-align:center;font-family:var(--mono);font-size:12px;color:var(--text-muted);margin-top:34px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">rishad<span>@</span>portfolio<span>:~$</span></div>
+    <div class="navlinks">
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#opensource">opensource</a>
+      <a href="#projects">projects</a>
+      <a href="#education">education</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="prompt-line"><span class="sym">~$</span> whoami</div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="terminal-title">rishad.sh</span>
+      </div>
+      <div class="terminal-body">
+        <div class="line" id="typed-line"></div>
+      </div>
+    </div>
+    <h1 class="name">Muhammed Rishad C</h1>
+    <div class="role">Software Engineer — Backend Systems &amp; AI/ML Applications</div>
+    <p class="summary">
+      I build backend systems and AI-powered applications — from a microservices platform processing
+      1,000+ evaluations a day, to open-source contributions in LLM tooling, to a Python package published
+      on PyPI. Comfortable across the stack, most at home in the backend.
+    </p>
+    <div class="links">
+      <a class="link-btn" href="https://github.com/muhammed-rishad-c" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="link-btn" href="https://linkedin.com/in/muhammed-rishad-c" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="link-btn" href="https://pypi.org/user/muhammed-rishad-c/" target="_blank" rel="noopener">PyPI ↗</a>
+      <a class="link-btn" href="mailto:muhammed.risshad@gmail.com">Email ↗</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-cmd">$ cat about.md</span>
+      <h2 class="sec-title">About</h2>
+    </div>
+    <p class="about-text">
+      I recently graduated with a <strong>B.Tech in Computer Science and Engineering</strong> from APJ Abdul
+      Kalam Technological University, Kerala. My work centers on <strong>backend engineering and AI application
+      development</strong> — designing REST APIs, optimizing databases, and integrating NLP/LLM capabilities into
+      production-style systems. I've contributed production-ready features to an open-source LLM memory framework,
+      published a benchmarking library on PyPI, and built full-stack platforms end to end, from schema design to
+      deployment with Docker. I like systems that are measured, not guessed — my own tools benchmark runtime and
+      memory, and I bring the same instinct to everything I build.
+    </p>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">8.63</div><div class="lbl">CGPA / 10.00</div></div>
+      <div class="stat-card"><div class="val">20+</div><div class="lbl">REST APIs shipped</div></div>
+      <div class="stat-card"><div class="val">1,000+</div><div class="lbl">submissions/day handled</div></div>
+      <div class="stat-card"><div class="val">7</div><div class="lbl">projects built</div></div>
+      <div class="stat-card"><div class="val">1</div><div class="lbl">package on PyPI</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-cmd">$ ls skills/</span>
+      <h2 class="sec-title">Technical Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <div class="chip-row">
+          <span class="chip">Python</span><span class="chip">JavaScript (ES6+)</span>
+          <span class="chip">SQL</span><span class="chip">C</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>AI / ML</h3>
+        <div class="chip-row">
+          <span class="chip">NLP</span><span class="chip">LLM Applications</span>
+          <span class="chip">PyTorch</span><span class="chip">Hugging Face Transformers</span>
+          <span class="chip">TensorFlow / Keras</span><span class="chip">scikit-learn</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Backend</h3>
+        <div class="chip-row">
+          <span class="chip">Flask</span><span class="chip">Node.js</span>
+          <span class="chip">Express.js</span><span class="chip">REST APIs</span>
+          <span class="chip">Microservices</span><span class="chip">Async Programming</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Frontend</h3>
+        <div class="chip-row">
+          <span class="chip">React.js</span><span class="chip">HTML5</span>
+          <span class="chip">CSS3</span><span class="chip">Bootstrap</span><span class="chip">EJS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Databases</h3>
+        <div class="chip-row">
+          <span class="chip">PostgreSQL</span><span class="chip">MongoDB</span>
+          <span class="chip">SQLite</span><span class="chip">MySQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Tools &amp; DevOps</h3>
+        <div class="chip-row">
+          <span class="chip">Docker</span><span class="chip">Git / GitHub</span>
+          <span class="chip">AWS EC2</span><span class="chip">Postman</span>
+          <span class="chip">PyTest</span><span class="chip">Jest</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Core CS</h3>
+        <div class="chip-row">
+          <span class="chip">Data Structures &amp; Algorithms</span><span class="chip">OOP</span>
+          <span class="chip">System Design</span><span class="chip">JWT Auth</span>
+          <span class="chip">RBAC</span><span class="chip">Query Optimization</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="opensource">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-cmd">$ git log --contributions</span>
+      <h2 class="sec-title">Open Source Contributions</h2>
+    </div>
+
+    <div class="oss-card">
+      <div class="oss-head">
+        <div class="oss-title">ContextEngine</div>
+        <div class="oss-links">
+          <span class="oss-tag">Contributor</span>
+          <a href="https://github.com/muhammed-rishad-c/ContextEngine" target="_blank" rel="noopener">Repo ↗</a>
+        </div>
+      </div>
+      <p style="color:var(--text-muted);font-size:14.5px;margin-bottom:14px;">
+        An open-source memory framework for LLM applications. Landed three merged pull requests adding
+        async support, accurate token accounting, and shared utilities across memory backends.
+      </p>
+      <ul class="bullets">
+        <li>Centralized duplicated cosine-similarity logic into a reusable utility module, cutting duplication across multiple memory backend implementations.</li>
+        <li>Built a pluggable <code>TiktokenEstimator</code> using OpenAI's tiktoken library for accurate context-budget enforcement across GPT-3.5, GPT-4, and Claude model families.</li>
+        <li>Designed <code>AsyncContextEngine</code> using <code>asyncio.to_thread()</code>, adding seamless async/await support for FastAPI and asyncio-based apps without touching the existing sync API.</li>
+        <li>Expanded automated test coverage for async execution, concurrency, token estimation, and edge-case handling.</li>
+      </ul>
+    </div>
+
+    <div class="oss-card">
+      <div class="oss-head">
+        <div class="oss-title">DSA Profiler</div>
+        <div class="oss-links">
+          <span class="oss-tag">Author &amp; Maintainer</span>
+          <a href="https://github.com/muhammed-rishad-c/dsa_profiler" target="_blank" rel="noopener">Repo ↗</a>
+          <a href="https://pypi.org/user/muhammed-rishad-c/" target="_blank" rel="noopener">PyPI ↗</a>
+        </div>
+      </div>
+      <p style="color:var(--text-muted);font-size:14.5px;margin-bottom:14px;">
+        A published Python package for benchmarking algorithm execution time, memory consumption, and
+        empirical time-complexity analysis.
+      </p>
+      <ul class="bullets">
+        <li>High-precision runtime and memory profiling using <code>time.perf_counter()</code> and <code>tracemalloc</code>.</li>
+        <li>Statistical complexity estimation using Ordinary Least Squares (OLS) regression and Pearson's R² correlation.</li>
+        <li>Lightweight SQLite persistence layer for historical benchmark storage and longitudinal analysis.</li>
+        <li>Packaged to modern Python standards with automated tests and full documentation, published on PyPI.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-cmd">$ ls projects/ | head -3</span>
+      <h2 class="sec-title">Projects</h2>
+    </div>
+
+    <!-- VISIBLE PROJECTS -->
+    <div class="project-card">
+      <div class="project-head">
+        <div class="project-title">AI-Powered Paper Evaluation System</div>
+        <div class="project-links"><a href="https://github.com/muhammed-rishad-c/paper-valuation" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </div>
+      <div class="pill-row">
+        <span class="pill">Node.js</span><span class="pill">Express.js</span><span class="pill">PostgreSQL</span>
+        <span class="pill">Docker</span><span class="pill">Python / Flask</span><span class="pill">NLP</span>
+      </div>
+      <div class="pai-block">
+        <div class="lbl">Final Year Project — Problem</div>
+        <p>Manual paper evaluation is slow and inconsistent at scale, with no reliable way to assist graders without sacrificing accuracy.</p>
+        <div class="lbl">Action</div>
+        <p>Architected a microservices platform integrating a Node.js/Express backend with a Python Flask AI service, and shipped 20+ REST APIs covering submission, authentication, evaluation workflows, and result management.</p>
+        <div class="lbl">Impact</div>
+        <p>The NLP-assisted scoring engine reached ~95% agreement with manual evaluation while the containerized services scaled to handle 1,000+ submissions per day.</p>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-head">
+        <div class="project-title">Blockchain Banking Platform</div>
+        <div class="project-links"><a href="https://github.com/muhammed-rishad-c/blockchain-banking-webapp" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </div>
+      <div class="pill-row">
+        <span class="pill">Node.js</span><span class="pill">Express.js</span><span class="pill">PostgreSQL</span>
+        <span class="pill">JWT</span><span class="pill">bcrypt</span><span class="pill">RBAC</span>
+      </div>
+      <div class="pai-block">
+        <div class="lbl">Problem</div>
+        <p>Banking backends need to be secure and auditable by default, not bolted on after the fact.</p>
+        <div class="lbl">Action</div>
+        <p>Built a secure banking backend with blockchain-based audit logging, JWT authentication, bcrypt password hashing, role-based access control, and REST APIs for accounts, transfers, bill payments, and transaction history.</p>
+        <div class="lbl">Impact</div>
+        <p>Improved PostgreSQL query performance by roughly 35% through indexing, query optimization, and a more modular application architecture.</p>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-head">
+        <div class="project-title">Green-Cycle — Waste Management &amp; Rewards Platform</div>
+        <div class="project-links"><a href="https://github.com/muhammed-rishad-c/waste-management" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </div>
+      <div class="pill-row">
+        <span class="pill">Node.js</span><span class="pill">Express</span><span class="pill">EJS</span><span class="pill">Multer</span>
+      </div>
+      <div class="pai-block">
+        <div class="lbl">Problem</div>
+        <p>Household recyclables often end up in landfills because people lack a direct incentive or a convenient way to connect with collection services.</p>
+        <div class="lbl">Action</div>
+        <p>Architected a dual-dashboard "Sell-and-Collect" platform with a Reward Matrix spanning 6 pricing tiers across 8 waste categories, and a 3-stage fulfillment pipeline (New → Pickup → Cleared) for district-based handling, with Multer-powered image verification.</p>
+        <div class="lbl">Impact</div>
+        <p>Digitized waste tracking end to end, bridging household waste generation and professional recycling with rewards tied to verified contribution value.</p>
+      </div>
+    </div>
+
+    <!-- HIDDEN PROJECTS -->
+    <div id="more-projects">
+      <div class="project-card">
+        <div class="project-head">
+          <div class="project-title">Event-Flow — Dual-Dashboard Event Management Platform</div>
+          <div class="project-links"><a href="https://github.com/muhammed-rishad-c/event-management" target="_blank" rel="noopener">GitHub ↗</a></div>
+        </div>
+        <div class="pill-row">
+          <span class="pill">Node.js</span><span class="pill">Express</span><span class="pill">PostgreSQL</span>
+        </div>
+        <div class="pai-block">
+          <div class="lbl">Problem</div>
+          <p>Booking event vendors — photographers, dress rentals, auditoriums — is usually a fragmented, disorganized process.</p>
+          <div class="lbl">Action</div>
+          <p>Built a full-stack marketplace with a dual-dashboard system for admins and customers, filterable vendor listings (e.g. by gender for rentals), date-validated slot booking, and full booking history.</p>
+          <div class="lbl">Impact</div>
+          <p>Delivered a scalable vendor marketplace with dynamic listings and secure admin controls, streamlining the experience for both providers and customers.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-head">
+          <div class="project-title">Conversational AI Chatbot — BuddyBot</div>
+          <div class="project-links"><a href="https://github.com/muhammed-rishad-c/Buddybot" target="_blank" rel="noopener">GitHub ↗</a></div>
+        </div>
+        <div class="pill-row">
+          <span class="pill">PyTorch</span><span class="pill">Hugging Face Transformers</span><span class="pill">GPT-2</span>
+        </div>
+        <div class="pai-block">
+          <div class="lbl">Problem</div>
+          <p>Building a digital assistant that holds context and generates natural dialogue needs careful data handling and precise fine-tuning.</p>
+          <div class="lbl">Action</div>
+          <p>Built an end-to-end MLOps pipeline fine-tuning GPT-2 on the DailyDialog dataset, with a custom preprocessing unit using [USER]/[BOT] tags and a context-aware window (context_size=2) for next-turn prediction.</p>
+          <div class="lbl">Impact</div>
+          <p>Delivered a working dialogue system handling tensor conversion and batching for large-scale language models — full MLOps lifecycle from data to deployment.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-head">
+          <div class="project-title">Deep Learning Next-Word Prediction</div>
+          <div class="project-links"><a href="https://github.com/muhammed-rishad-c/next-word-prediction" target="_blank" rel="noopener">GitHub ↗</a></div>
+        </div>
+        <div class="pill-row">
+          <span class="pill">TensorFlow</span><span class="pill">Keras</span><span class="pill">LSTM</span><span class="pill">GRU</span>
+        </div>
+        <div class="pai-block">
+          <div class="lbl">Summary</div>
+          <p>Built and compared LSTM and GRU recurrent networks for next-word prediction, training on a large text corpus to learn complex language patterns and evaluating the two architectures against each other.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-head">
+          <div class="project-title">Phishing &amp; Scam Website Detection</div>
+          <div class="project-links"><a href="https://github.com/muhammed-rishad-c/networksecurity" target="_blank" rel="noopener">GitHub ↗</a></div>
+        </div>
+        <div class="pill-row">
+          <span class="pill">scikit-learn</span><span class="pill">Random Forest</span><span class="pill">Feature Engineering</span>
+        </div>
+        <div class="pai-block">
+          <div class="lbl">Summary</div>
+          <p>Trained a classifier to flag malicious websites, engineering features from URL and content data and comparing Random Forest and SVM models to reliably separate legitimate sites from scam sites.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="load-more-wrap">
+      <button class="load-more-btn" id="loadMoreBtn" onclick="toggleProjects()">$ load-more --projects (4 hidden)</button>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-cmd">$ cat education.json</span>
+      <h2 class="sec-title">Education</h2>
+    </div>
+    <div class="edu-card">
+      <div class="edu-left">
+        <h3>B.Tech, Computer Science and Engineering</h3>
+        <p>APJ Abdul Kalam Technological University (KTU), Kerala</p>
+      </div>
+      <div class="edu-right">
+        <div>Apr 2026</div>
+        <div class="cgpa">8.63 / 10.00</div>
+      </div>
+    </div>
+    <div class="certs">
+      <div class="cert-row">Data Science — NPTEL</div>
+      <div class="cert-row">The Complete AI &amp; Machine Learning Bootcamp — Udemy</div>
+      <div class="cert-row">The Complete Web Development Bootcamp — Udemy</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <h2>$ mail --send</h2>
+      <p>Open to Software Engineering, Backend, and AI/ML roles. Reach out — I reply fast.</p>
+      <div class="contact-links">
+        <a class="link-btn" href="mailto:muhammed.risshad@gmail.com">Email</a>
+        <a class="link-btn" href="https://github.com/muhammed-rishad-c" target="_blank" rel="noopener">GitHub</a>
+        <a class="link-btn" href="https://linkedin.com/in/muhammed-rishad-c" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="link-btn" href="https://pypi.org/user/muhammed-rishad-c/" target="_blank" rel="noopener">PyPI</a>
+      </div>
+    </div>
+    <div class="foot-note">© 2026 Muhammed Rishad C — built with vanilla HTML/CSS/JS, no framework, no fuss.</div>
+  </div>
+</footer>
+
+<script>
+  // Terminal typing effect
+  (function(){
+    var el = document.getElementById('typed-line');
+    var text = "role = ['Software Engineer', 'Backend Developer', 'AI/ML Engineer', 'Open Source Contributor']";
+    var i = 0;
+    function type(){
+      if(i <= text.length){
+        el.innerHTML = text.slice(0,i) + '<span class="cursor"></span>';
+        i++;
+        setTimeout(type, 18);
+      } else {
+        el.innerHTML = text + '<span class="cursor"></span>';
+      }
+    }
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      el.innerHTML = text;
+    } else {
+      type();
+    }
+  })();
+
+  function toggleProjects(){
+    var more = document.getElementById('more-projects');
+    var btn = document.getElementById('loadMoreBtn');
+    var expanded = more.classList.toggle('show');
+    btn.textContent = expanded ? '$ collapse --projects' : '$ load-more --projects (4 hidden)';
+  }
+</script>
+
+</body>
+</html>
